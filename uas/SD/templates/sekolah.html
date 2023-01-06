@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+
+    <div class="row">
+      <div class="col-md-12" id="map"></div>
+    </div><br><br>
+    <div class="container" style="text-align: center;" >
+      <h1 data-aos="fade-up">{{ heading }}</h1>
+    </div>
+    <div class="table-responsive" style="margin: 200px; margin-top: 0%;" >
+    <table class="table">
+        <thead>
+          <tr>
+                <th scope="col">Nama Sekolah</th>
+                <th scope="col">Titik Koordinat</th>
+                <th scope="col">Keterangan</th>
+                
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for Sekolah in books %}
+            <tr>
+                
+                <td>{{ Sekolah.nama_sekolah }}</td>
+                <td>{{ Sekolah.titik_koordinat }}</td>
+                <td>{{ Sekolah.keterangan }}</td>
+                <td>
+                  <a href="{% url 'update_SD' Sekolah.id %}" class="btn btn-sm btn-warning">Update</a>|
+                  <a href="{% url 'delete_SD' Sekolah.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn btn-success" href="/tambah_SD">Tambah Data</a>
+    </div>
+
+
+
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> 
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js   "></script> 
+    <script src="table.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin="anonymous"></script>
+    <script>
+
+      const map = L.map('map').setView([-6.125820737843165, 106.14673503653871], 16);
+
+      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+    </script>
+{% endblock%}

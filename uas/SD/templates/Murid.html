@@ -1,0 +1,40 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+<br><br><br>
+
+    <div class="container" style="text-align: center;">
+      <h1>{{ judul }}</h1>
+    </div>
+    <div class="table-responsive" style="margin: 200px; margin-top: 0%;" >
+    <table class="table">
+        <thead>
+          <tr>
+                <th scope="col">NPSN</th>
+                <th scope="col">Nama Sekolah</th>
+                <th scope="col">Jumlah Murid</th>
+                
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for murid in books %}
+            <tr>
+                
+                <td>{{ murid.NPSN }}</td>
+                <td>{{ murid.nama }}</td>
+                <td>{{ murid.jmlhmurid }}</td>
+                <td>
+                  <a href="{% url 'update_murid' murid.id %}" class="btn btn-sm btn-warning">Update</a>|
+                  <a href="{% url 'delete_murid' murid.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn btn-success" href="/tambah_murid">Tambah Data</a>
+    </div>
+
+    
+    
+
+{% endblock%}
